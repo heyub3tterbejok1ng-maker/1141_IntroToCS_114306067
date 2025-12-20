@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<head>
+</head>
+<body>
+    <h1>Grade Statistics</h1>
+
+    <div id="input-form">
+        <label for="math-grade">Math</label>
+        <input type="number" id="math-grade" min="0" max="100" required>
+        <br><br>
+        <label for="english-grade">English</label>
+        <input type="number" id="english-grade" min="0" max="100" required>
+        <br><br>
+        <button id="submit-btn">Submit</button>
+    </div>
+
+    <table id="grades-table" border="1">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Math</th>
+                <th>English</th>
+                <th>Average</th>
+            </tr>
+        </thead>
+        <tbody id="table-body">
+            <tr><td>1</td><td class="math-score">60</td><td class="english-score">70</td><td class="row-average">65.00</td></tr>
+            <tr><td>2</td><td class="math-score">100</td><td class="english-score">80</td><td class="row-average">90.00</td></tr>
+            <tr><td>3</td><td class="math-score">40</td><td class="english-score">70</td><td class="row-average">55.00</td></tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td>Average</td>
+                <td id="avg-math"></td>
+                <td id="avg-english"></td>
+                <td id="avg-overall"></td>
+            </tr>
+        </tfoot>
+    </table>
+
+    <script>
+        var submitBtn, mathInput, englishInput, tableBody;
+        var avgMathDisplay, avgEnglishDisplay, avgOverallDisplay;
+
+        submitBtn = document.getElementById('submit-btn');
+        mathInput = document.getElementById('math-grade');
+        englishInput = document.getElementById('english-grade');
+        tableBody = document.getElementById('table-body');
+        avgMathDisplay = document.getElementById('avg-math');
+        avgEnglishDisplay = document.getElementById('avg-english');
+        avgOverallDisplay = document.getElementById('avg-overall');
+
+
+        var currentRowCount = tableBody.rows.length;
+
+
+        updateColumnAverages(); 
+
+        submitBtn.addEventListener("click", function () { 
+            var mathGrade = parseInt(mathInput.value);
+            var englishGrade = parseInt(englishInput.value);
+
+            if (isNaN(mathGrade) || isNaN(englishGrade) || mathGrade < 0 || englishGrade < 0 || mathGrade > 100 || englishGrade > 100) {
+                alert("請輸入 0 到 100 之間的有效成績！");
+                return;
+            }
+
+            addRow(mathGrade, englishGrade);
+
+            updateColumnAverages();
+            
+            mathInput.value = '';
+            englishInput.value = '';
+        }); 
+
+
+        function addRow(math, english) {
+            currentRowCount++; 
+
+            var rowAverage = ((math + english) / 2).toFixed(2);
+            var newRow = tableBody.insertRow();
+            
+            newRow.insertCell().textContent = currentRowCount; 
+
+            var mathCell = newRow.insertCell();
+            mathCell.textContent = math;
+            mathCell.classList.add('math-score'); 
+
+            var englishCell = newRow.insertCell();
+            englishCell.textContent = english;
+            englishCell.classList.add('english-score'); 
+
+            var avgCell = newRow.insertCell();
+            avgCell.textContent = rowAverage;
+            avgCell.classList.add('row-average');
+        }
+
+        function updateColumnAverages() { 
+            var allRows = tableBody.rows;
+            var totalRows = allRows.length;
+            
+            if (totalRows === 0) {
+                avgMathDisplay.textContent = '0.00';
+                avgEnglishDisplay.textContent = '0.00';
+                avgOverallDisplay.textContent = '0.00';
+                return;
+            }
+
+            var totalMath = 0;
+            var totalEnglish = 0;
+            var totalOverall = 0;
+
+            for (var i = 0; i < totalRows; i++) {
+                var row = allRows[i];
+                
+                var math = parseFloat(row.cells[1].textContent);
+                var english = parseFloat(row.cells[2].textContent);
+                
+                totalMath += math;
+                totalEnglish += english;
+                totalOverall += (math + english) / 2;
+            }
+
+            var avgMath = (totalMath / totalRows).toFixed(2);
+            var avgEnglish = (totalEnglish / totalRows).toFixed(2);
+            var avgOverall = (totalOverall / totalRows).toFixed(2);
+
+            avgMathDisplay.textContent = avgMath;
+            avgEnglishDisplay.textContent = avgEnglish;
+            avgOverallDisplay.textContent = avgOverall;
+        }
+    </script>
+</body>
+</html>
