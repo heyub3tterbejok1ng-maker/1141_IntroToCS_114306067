@@ -1,0 +1,138 @@
+body {
+    background-color: #fff5f8;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #333;
+}
+
+.main-container {
+    width: 1000px;
+    display: flex;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.left-panel {
+    width: 30%;
+    background-color: #e3a6b4;
+    color: white;
+    border-radius: 12px 0 0 12px;
+}
+
+.photo-panel img {
+    width: 100%;
+    border-radius: 12px 0 0 0;
+}
+
+.text-content {
+    padding: 20px;
+}
+
+.text-content ul {
+    list-style: none;
+    padding: 0;
+}
+
+.text-content a {
+    color: white;
+    text-decoration: underline;
+}
+
+.school-logo {
+    width: 80px;
+    margin-top: 20px;
+}
+
+.right-panel {
+    width: 70%;
+    padding: 30px;
+}
+
+.section {
+    margin-bottom: 30px;
+}
+
+.section-title {
+    border-bottom: 2px solid #c97a8a;
+    padding-bottom: 5px;
+    margin-bottom: 15px;
+    color: #b56576;
+}
+
+.timeline-item {
+    margin-bottom: 10px;
+}
+
+.year {
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.tag {
+    display: inline-block;
+    background-color: #f1c4cf;
+    color: #7a3e4f;
+    padding: 5px 10px;
+    border-radius: 20px;
+    margin: 5px;
+}
+
+.hw-lab-container {
+    display: flex;
+    gap: 20px;
+}
+
+.hw-column,
+.lab-column {
+    width: 50%;
+    background-color: #fff0f4;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+.hw-column ul,
+.lab-column ul {
+    list-style: none;
+    padding: 0;
+}
+
+.hw-column a,
+.lab-column a {
+    text-decoration: none;
+    color: #b56576;
+}
+
+.hw-column a:hover,
+.lab-column a:hover {
+    text-decoration: underline;
+}
+
+/* Music */
+.music-row {
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+}
+
+.music-row img {
+    width: 60px;
+}
+
+.music-row a {
+    text-decoration: none;
+    color: #333;
+}
+
+.music-note {
+    margin-top: 10px;
+}
+
+@media print {
+    body {
+        background-color: white;
+        color: black;
+    }
+}
