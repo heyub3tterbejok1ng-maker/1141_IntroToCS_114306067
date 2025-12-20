@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+    <div>
+        <h2>JS Calculator</h2>
+        
+        <label for="num1">Number 1</label>
+        <input type="number" id="num1" placeholder="Enter first number"><br><br>
+
+        <label for="num2">Number 2</label>
+        <input type="number" id="num2" placeholder="Enter second number"><br><br>
+
+        <label for="operator">Operate way?</label>
+        <select id="operator">
+            <option value="+">+</option>
+            <option value="-">-</option>
+            <option value="*">*</option>
+            <option value="/">/</option>
+        </select><br><br>
+
+        <button id="calculateBtn">Calculate</button>
+
+        <p id="resultDisplay">Result = 0.00</p>
+    </div>
+
+    <script>
+        var add = function(a, b) {
+            return a + b;
+        };
+
+        var subtract = function(a, b) {
+            return a - b;
+        };
+
+        var multiply = function(a, b) {
+            return a * b;
+        };
+
+        var divide = function(a, b) {
+            if (b === 0) {
+                return "Error: Division by zero";
+            }
+            return a / b;
+        };
+
+        var calculate = function() {
+            var num1Input = document.getElementById('num1');
+            var num2Input = document.getElementById('num2');
+            var operatorSelect = document.getElementById('operator');
+            var resultDisplay = document.getElementById('resultDisplay');
+
+            var num1 = parseFloat(num1Input.value);
+            var num2 = parseFloat(num2Input.value);
+            var operator = operatorSelect.value;
+            var result;
+
+            if (isNaN(num1) || isNaN(num2)) {
+                resultDisplay.textContent = "Error: Please enter valid numbers";
+                return;
+            }
+
+            switch (operator) {
+                case '+':
+                    result = add(num1, num2);
+                    break;
+                case '-':
+                    result = subtract(num1, num2);
+                    break;
+                case '*':
+                    result = multiply(num1, num2);
+                    break;
+                case '/':
+                    result = divide(num1, num2);
+                    break;
+                default:
+                    result = "Error: Invalid operator";
+            }
+
+            if (typeof result === 'string') {
+                resultDisplay.textContent = result;
+            } else {
+                var formattedResult = result.toFixed(2);
+                resultDisplay.textContent = "Result = " + formattedResult;
+            }
+        };
+
+        var calculateBtn = document.getElementById('calculateBtn');
+        calculateBtn.addEventListener('click', calculate);
+    </script>
+</body>
+</html>
